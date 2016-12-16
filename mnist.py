@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 
 #%% 
 # load the training data
-df_train = pd.read_csv(‘digit-recognizer/train.csv')
+df_train = pd.read_csv('digit-recognizer/train.csv')
 y_train = df_train['label'].values
 X_train = df_train.drop('label', axis=1).values
 
@@ -113,6 +113,9 @@ model.add(Activation('softmax'))
 model.compile(optimizer='rmsprop',
               loss='categorical_crossentropy',
               metrics=['accuracy'])
+#%%
+from keras.utils.visualize_util import plot
+plot(model, to_file='digit-recognizer/model.png')
 
 #%% fit the model with validation
 hist = model.fit(X_train, y_train, nb_epoch=5, validation_split=0.2, batch_size=32)
